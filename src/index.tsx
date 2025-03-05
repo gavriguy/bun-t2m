@@ -5,7 +5,9 @@ import {
   HttpClientResponse,
 } from "@effect/platform";
 import { Array, Effect, Option, Queue, Schema, Stream } from "effect";
+import html, { Html } from "@elysiajs/html";
 import { Elysia, t } from "elysia";
+import Markdoc from "@markdoc/markdoc";
 const port = process.env.PORT || 3000;
 
 const itemsPerPage = 10;
@@ -16,7 +18,17 @@ const app = new Elysia({
     idleTimeout: 0, // make sure we don't close the connection
   },
 })
+  .use(html())
   .get("/", () => "Hello Elysia!!!")
+  .get("/test-doc1", async () => {
+    const path = "./src/docs/test-doc1.md";
+    const file = Bun.file(path);
+    const doc = await file.text();
+    const ast = Markdoc.parse(doc);
+    const content = Markdoc.transform(ast);
+    const rendered = Markdoc.renderers.html(content);
+    return <div>{rendered}</div>;
+  })
   .get(
     "/items",
     ({ query }) => {

@@ -3,10 +3,13 @@
   "version": "1.0.50",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "bun run --watch src/index.ts"
+    "dev": "bun run --watch src/index.tsx",
+    "start": "bun run src/index.tsx"
   },
   "dependencies": {
     "@effect/platform": "^0.77.6",
+    "@elysiajs/html": "^1.2.0",
+    "@markdoc/markdoc": "^0.5.1",
     "effect": "^3.13.6",
     "elysia": "latest"
   },
