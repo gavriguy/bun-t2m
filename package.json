@@ -6,6 +6,8 @@
     "dev": "bun run --watch src/index.ts"
   },
   "dependencies": {
+    "@effect/platform": "^0.77.6",
+    "effect": "^3.13.6",
     "elysia": "latest"
   },
   "devDependencies": {
