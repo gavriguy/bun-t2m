@@ -11,7 +11,11 @@ const port = process.env.PORT || 3000;
 const itemsPerPage = 10;
 const lastPage = 3; //starting from 0
 
-const app = new Elysia()
+const app = new Elysia({
+  serve: {
+    idleTimeout: 0, // make sure we don't close the connection
+  },
+})
   .get("/", () => "Hello Elysia!!!")
   .get(
     "/items",
